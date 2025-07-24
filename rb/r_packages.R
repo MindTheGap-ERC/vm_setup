@@ -1,0 +1,10 @@
+# installs all required R packages
+install.packages("BiocManager")
+BiocManager::install("ggtree")
+install.packages("TreeSim")
+install.packages("FossilSim")
+install.packages("geiger")
+install.packages("phyclust")
+install.packages("StratPal")
+install.packages("admtools")
+install.packages("osfr")
