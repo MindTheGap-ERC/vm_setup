@@ -1,17 +1,17 @@
 
 # github authentication
-# (type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \
-# 	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
-# 	&& out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
-# 	&& cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
-# 	&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
-# 	&& sudo mkdir -p -m 755 /etc/apt/sources.list.d \
-# 	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-# 	&& sudo apt update \
-# 	&& sudo apt install gh -y
-#   gh auth login
+(type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \
+	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
+	&& out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+	&& cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+	&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+	&& sudo mkdir -p -m 755 /etc/apt/sources.list.d \
+	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+	&& sudo apt update \
+	&& sudo apt install gh -y
+  gh auth login
 
-sudo apt install r-base-dev libssl-dev libcurl4-openssl-dev build-essential cmake libboost-all-dev r-base-dev
+sudo apt install r-base-dev libssl-dev libcurl4-openssl-dev build-essential cmake libboost-all-dev r-base-dev openmpi-bin libopenmpi-dev
 mkdir -p documents/github/
 
 Rscript r_packages.R
@@ -20,8 +20,14 @@ Rscript r_packages.R
 cd ~/documents/github/
 git clone --branch development https://github.com/revbayes/revbayes.git revbayes
 cd revbayes/projects/cmake
-./build.sh
+#./build.sh
+./build.sh -boost-root /usr/include/boost
 echo 'export PATH="$HOME/documents/github/revbayes/projects/cmake/build:$PATH"' >> ~/.bashrc
+
+# mpi version
+#./build.sh -mpi true -boost-root /usr/include/boost
+#echo 'export PATH="$HOME/documents/github/revbayes/projects/cmake/build-mpi:$PATH"' >> ~/.bashrc
+
 source ~/.bashrc
 
 # install conda
