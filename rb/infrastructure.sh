@@ -12,17 +12,17 @@
   gh auth login
 
 sudo apt install r-base-dev libssl-dev libcurl4-openssl-dev build-essential cmake libboost-all-dev r-base-dev openmpi-bin libopenmpi-dev
-mkdir -p documents/github/
+mkdir -p Documents/github/
 
 Rscript r_packages.R
 
 # compile revBayes and add to path
-cd ~/documents/github/
+cd ~/Documents/github/
 git clone --branch development https://github.com/revbayes/revbayes.git revbayes
 cd revbayes/projects/cmake
 #./build.sh
 ./build.sh -boost-root /usr/include/boost
-echo 'export PATH="$HOME/documents/github/revbayes/projects/cmake/build:$PATH"' >> ~/.bashrc
+echo 'export PATH="$HOME/Documents/github/revbayes/projects/cmake/build:$PATH"' >> ~/.bashrc
 
 # mpi version
 #./build.sh -mpi true -boost-root /usr/include/boost
@@ -40,15 +40,15 @@ conda config --set auto_activate_base false
 conda deactivate
 
 # install snakemake
-cd ~/documents/github
-conda create -c conda-forge -c bioconda -n phylostrat snakemake
+cd ~/Documents/github
+conda create -c conda-forge -c bioconda -n snakemake snakemake
 
 # install ibridges & connect to yoda
 git clone -b switch-to-ibridges https://github.com/qubixes/snakemake-storage-plugin-irods
-conda activate phylostrat
-cd ~/documents/github/snakemake-storage-plugin-irods
+conda activate snakemake
+cd ~/Documents/github/snakemake-storage-plugin-irods
 pip install .
-cd ~/documents/github/
+cd ~/Documents/github/
 pip install ibridges-servers-uu
 ibridges setup --list
 ibridges setup uu-geo
@@ -57,7 +57,7 @@ ibridges init
 ibridges list "irods://nluu11p/home/research-mindthegap"
 
 # get main repo
-cd ~/documents/github
+cd ~/Documents/github
 git clone https://github.com/MindTheGap-ERC/phylostrat
 cd phylostrat
 
