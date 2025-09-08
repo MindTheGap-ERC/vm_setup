@@ -10,6 +10,7 @@
 	&& sudo apt update \
 	&& sudo apt install gh -y
   gh auth login
+  gh auth setup-git
 
 sudo apt install r-base-dev libssl-dev libcurl4-openssl-dev build-essential cmake libboost-all-dev r-base-dev openmpi-bin libopenmpi-dev
 mkdir -p Documents/github/
